@@ -19,6 +19,7 @@ def get_locale():
 
 
 app = Flask(__name__)
+
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -70,4 +71,7 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
 
-from app import routes, models, errors, cli
+from app import routes, models, cli
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
