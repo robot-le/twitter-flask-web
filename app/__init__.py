@@ -10,6 +10,7 @@ from flask_moment import Moment
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from lingua import LanguageDetectorBuilder
+from elasticsearch import Elasticsearch
 
 
 def get_locale():
@@ -37,6 +38,9 @@ def create_app(config_class=Config):
     mail.init_app(app)
     moment.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
+
+    app.elasticsearch = Elasticsearch([app.config.get('ELASTICSEARCH_URL')]) \
+        if app.config.get('ELASTICSEARCH_URL') else None
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
