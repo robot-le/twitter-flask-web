@@ -10,8 +10,6 @@ from flask_moment import Moment
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from lingua import LanguageDetectorBuilder
-from google.cloud import translate_v2 as translate
-from google.oauth2 import service_account
 
 
 def get_locale():
@@ -29,12 +27,6 @@ mail = Mail(app)
 moment = Moment(app)
 babel = Babel(app, locale_selector=get_locale)
 detector = LanguageDetectorBuilder.from_all_languages().build()
-
-google_application_credentials = service_account.Credentials.from_service_account_file(
-    app.config.get('GOOGLE_APPLICATION_CREDENTIALS'),
-    scopes=["https://www.googleapis.com/auth/cloud-platform"]
-)
-translator = translate.Client(credentials=google_application_credentials)
 
 if not app.debug:
     if app.config.get('MAIL_SERVER'):
@@ -71,9 +63,10 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
 
-from app import routes, models, cli
+from app import models, cli
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
 from app.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix='/auth')
-
+from app.main import bp as main_bp
+app.register_blueprint(main_bp)
