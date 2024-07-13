@@ -4,7 +4,8 @@ from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from app import db, login, app
+from app import db, login
+from flask import current_app
 from flask_login import UserMixin
 from hashlib import md5
 
@@ -107,7 +108,7 @@ class User(UserMixin, db.Model):
                 'reset_password': self.id,
                 'exp': time() + expires_in,
             },
-            app.config.get('SECRET_KEY'),
+            current_app.config.get('SECRET_KEY'),
             algorithm='HS256',
         )
         return jwt_token
@@ -117,7 +118,7 @@ class User(UserMixin, db.Model):
         try:
             user_id = jwt.decode(
                 jwt_token,
-                app.config.get('SECRET_KEY'),
+                current_app.config.get('SECRET_KEY'),
                 algorithms=['HS256'],
             )['reset_password']
         except:
