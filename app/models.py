@@ -39,7 +39,10 @@ class User(UserMixin, db.Model):
     password_hash: so.Mapped[str | None] = so.mapped_column(sa.String(256))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
     about_me: so.Mapped[str | None] = so.mapped_column(sa.String(140))
-    last_seen: so.Mapped[str | None] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
+    last_seen: so.Mapped[str | None] = so.mapped_column(
+        sa.String(256),
+        default=lambda: datetime.now(timezone.utc),
+    )
     following: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
