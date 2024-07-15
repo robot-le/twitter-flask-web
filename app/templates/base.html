@@ -53,6 +53,11 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ url_for('auth.logout') }}">Logout</a>
                 </li>
+                <li>
+                    <a href="{{ url_for('main.messages') }}" class="nav-link" aria-current="page">
+                        {{ _('Messages') }}
+                    </a>
+                </li>
                 {% endif %}
             </ul>
         </div>

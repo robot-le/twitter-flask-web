@@ -7,6 +7,15 @@
         <td>
             <h1>User: {{ user.username }}</h1>
             {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+
+            {% if user != current_user %}
+                <p>
+                    <a href="{{ url_for('main.send_message', recipient=user.username) }}">
+                    {{ _('Send private message') }}
+                    </a>
+                </p>
+            {% endif %}
+
             {% if user.last_seen %}
                 <p>Last seen on: {{ moment(user.last_seen).format('lll') }}</p>
             {% endif %}

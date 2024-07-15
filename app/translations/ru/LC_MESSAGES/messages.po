@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-13 12:18+0600\n"
+"POT-Creation-Date: 2024-07-15 22:02+0600\n"
 "PO-Revision-Date: 2024-07-12 20:14+0600\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,28 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: app/auth/forms.py:11 app/auth/forms.py:18 app/forms.py:11
-#: app/main/forms.py:11
+#: app/__init__.py:24
+msgid "Please log in to access this page."
+msgstr "Пожалуйста, войдите в систему"
+
+#: app/auth/forms.py:11 app/auth/forms.py:18 app/main/forms.py:12
 msgid "Username"
 msgstr "Юзернейм"
-
-#: app/auth/forms.py:19 app/auth/forms.py:42 app/forms.py:12
-#: app/main/forms.py:12
-msgid "Email"
-msgstr "Электронная почта"
-
-#: app/forms.py:13 app/main/forms.py:13
-msgid "About me"
-msgstr "Обо мне"
-
-#: app/forms.py:14 app/forms.py:30 app/forms.py:41 app/main/forms.py:14
-#: app/main/forms.py:30 app/main/forms.py:41
-msgid "Submit"
-msgstr "Отправить"
-
-#: app/forms.py:35 app/main/forms.py:35
-msgid "Say something"
-msgstr "Скажите что-нибудь"
 
 #: app/auth/forms.py:12 app/auth/forms.py:20 app/auth/forms.py:47
 msgid "Password"
@@ -53,6 +38,10 @@ msgstr "Запомнить меня"
 #: app/auth/forms.py:14
 msgid "Sign In"
 msgstr "Войти"
+
+#: app/auth/forms.py:19 app/auth/forms.py:42 app/main/forms.py:13
+msgid "Email"
+msgstr "Электронная почта"
 
 #: app/auth/forms.py:22 app/auth/forms.py:49
 msgid "Repeat Password"
@@ -84,45 +73,130 @@ msgstr ""
 msgid "Your password has been reset."
 msgstr "Ваш пароль был обновлён."
 
-#: app/main/routes.py:54
+#: app/main/forms.py:14
+msgid "About me"
+msgstr "Обо мне"
+
+#: app/main/forms.py:15 app/main/forms.py:31 app/main/forms.py:42
+#: app/main/forms.py:61
+msgid "Submit"
+msgstr "Отправить"
+
+#: app/main/forms.py:36
+msgid "Say something"
+msgstr "Скажите что-нибудь"
+
+#: app/main/forms.py:46 app/main/routes.py:235
+msgid "Search"
+msgstr "Поиск"
+
+#: app/main/forms.py:58
+msgid "Message"
+msgstr "Сообщение"
+
+#: app/main/routes.py:57
 msgid "Your post in now live!"
 msgstr "Ваш пост опубликован!"
 
-#: app/main/routes.py:137
+#: app/main/routes.py:140
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-#: app/main/routes.py:159 app/main/routes.py:181
+#: app/main/routes.py:162 app/main/routes.py:184
 #, fuzzy, python-format
 msgid "User %(username)s not found."
 msgstr "Пользователь %(username) не найден."
 
-#: app/main/routes.py:162
+#: app/main/routes.py:165
 msgid "You cannot follow yourself!"
 msgstr "Вы не можете подписаться на себя!"
 
-#: app/main/routes.py:166
+#: app/main/routes.py:169
 #, fuzzy, python-format
 msgid "You are following %(username)s!"
 msgstr "Вы подписаны на %(username)"
 
-#: app/main/routes.py:184
+#: app/main/routes.py:187
 msgid "You cannot unfollow yourself!"
 msgstr "Вы не можете отписаться от себя!"
 
-#: app/main/routes.py:188
+#: app/main/routes.py:191
 #, fuzzy, python-format
 msgid "You are not following %(username)s."
 msgstr "Вы отписались от %(username)"
 
-#: app/templates/_post.html:21
+#: app/main/routes.py:267
+#, fuzzy
+msgid "Your message has been sent."
+msgstr "Ваш пароль был обновлён."
+
+#: app/main/routes.py:271
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+#: app/templates/_post.html:19
 msgid "Translate"
 msgstr "Перевести"
+
+#: app/templates/base.html:58 app/templates/messages.html:4
+msgid "Messages"
+msgstr "Сообщения"
 
 #: app/templates/index.html:5
 #, fuzzy, python-format
 msgid "Hi, %(username)s!"
 msgstr "Привет, %(username)s!"
+
+#: app/templates/messages.html:12
+msgid "Newer messages"
+msgstr "Новые сообщения"
+
+#: app/templates/messages.html:17
+msgid "Older messages"
+msgstr "Старые сообщения"
+
+#: app/templates/search.html:4
+msgid "Search Results"
+msgstr "Результаты поиска"
+
+#: app/templates/search.html:12
+msgid "Newer posts"
+msgstr "Новые посты"
+
+#: app/templates/search.html:17
+msgid "Older posts"
+msgstr "Старые посты"
+
+#: app/templates/send_message.html:5
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "Отправить сообщение %(recipient)s"
+
+#: app/templates/user.html:14
+msgid "Send private message"
+msgstr "Отправить личное сообщение"
+
+#: app/templates/user_popup.html:7
+msgid "Last seen on"
+msgstr "Был онлайн"
+
+#: app/templates/user_popup.html:9
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d подписчиков"
+
+#: app/templates/user_popup.html:9
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d подписок"
+
+#: app/templates/user_popup.html:15
+msgid "Follow"
+msgstr "Подписаться"
+
+#: app/templates/user_popup.html:22
+msgid "Unfollow"
+msgstr "Отписаться"
 
 #: app/templates/errors/404.html:4
 msgid "File Not Found"
