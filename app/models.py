@@ -74,7 +74,7 @@ class User(UserMixin, db.Model):
             Message.recipient == self,
             Message.timestamp > last_read_time,
         )
-        return db.session.scalars(sa.select(sa.func.count()).select_from(query.subquery()))
+        return db.session.scalar(sa.select(sa.func.count()).select_from(query.subquery()))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

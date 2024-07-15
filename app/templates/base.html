@@ -56,6 +56,10 @@
                 <li>
                     <a href="{{ url_for('main.messages') }}" class="nav-link" aria-current="page">
                         {{ _('Messages') }}
+                        {% set unread_message_count = current_user.unread_message_count() %}
+                        <span class="badge text-bg-danger">
+                            {{ unread_message_count }}
+                        </span>
                     </a>
                 </li>
                 {% endif %}
