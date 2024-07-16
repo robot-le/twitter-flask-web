@@ -233,9 +233,10 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
         data = {
             'id': self.id,
             'username': self.username,
-            'last_seen': self.last_seen.replace(
-                tzinfo=timezone.utc
-            ).isoformat() if self.last_seen else None,
+            # 'last_seen': self.last_seen.replace(
+            #     tzinfo=timezone.utc
+            # ).isoformat() if self.last_seen else None,
+            'last_seen': self.last_seen,
             'about_me': self.about_me,
             'post_count': self.posts_count(),
             'follower_count': self.followers_count(),
