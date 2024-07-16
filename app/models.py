@@ -1,3 +1,5 @@
+import json
+
 from app.search import add_to_index, remove_from_index, query_index
 import jwt
 from time import time
@@ -64,6 +66,7 @@ class User(UserMixin, db.Model):
         foreign_keys='Message.recipient_id',
         back_populates='recipient',
     )
+    notifications: so.WriteOnlyMapped['Notification'] = so.relationship(back_populates='user')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -146,6 +149,20 @@ class User(UserMixin, db.Model):
             return
 
         return db.session.get(User, user_id)
+
+    def add_notification(self, name, data):
+        db.session.execute(
+            self.notifications
+            .delete()
+            .where(Notification.name == name)
+        )
+        n = Notification(
+            name=name,
+            payload_json=json.dumps(data),
+            user=self
+        )
+        db.session.add(n)
+        return n
 
 
 class SearchableMixin:
@@ -236,3 +253,15 @@ class Message(db.Model):
 
     def __repr__(self):
         return f'<Message {self.body}'
+
+
+class Notification(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(128), index=True)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
+    timestamp: so.Mapped[float] = so.mapped_column(default=time, index=True)
+    payload_json: so.Mapped[str] = so.mapped_column(sa.Text)
+    user: so.Mapped[User] = so.relationship(back_populates='notifications')
+
+    def get_data(self):
+        return json.loads(str(self.payload_json))
