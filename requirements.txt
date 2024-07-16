@@ -42,7 +42,9 @@ pyasn1_modules==0.4.0
 PyJWT==2.8.0
 python-dotenv==1.0.1
 pytz==2024.1
+redis==5.0.7
 requests==2.32.3
+rq==1.16.2
 rsa==4.9
 setuptools==70.3.0
 six==1.16.0

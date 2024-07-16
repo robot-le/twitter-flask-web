@@ -21,3 +21,4 @@ class Config:
     LANGUAGES = ['en', 'ru']
     GOOGLE_APPLICATION_CREDENTIALS = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    REDIS_URL = os.environ.get('REDIS_URL', 'redis://')

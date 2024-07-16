@@ -1,5 +1,7 @@
 import os
+import rq
 import logging
+from redis import Redis
 from config import Config
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask, request, current_app
@@ -41,6 +43,8 @@ def create_app(config_class=Config):
 
     app.elasticsearch = Elasticsearch([app.config.get('ELASTICSEARCH_URL')]) \
         if app.config.get('ELASTICSEARCH_URL') else None
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
